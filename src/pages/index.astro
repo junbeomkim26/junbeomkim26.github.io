@@ -1,0 +1,225 @@
+---
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '#' },
+  { label: 'Projects', href: '#' },
+  { label: 'Posts', href: '#' },
+];
+
+const gridItems = [
+  { title: 'About', caption: '나를 소개하는 공간' },
+  { title: 'Projects', caption: '만든 것들을 모으는 곳' },
+  { title: 'Posts', caption: '생각과 기록을 남기는 곳' },
+  { title: 'Contact', caption: '연결할 방법을 정리하는 곳' },
+  { title: 'Now', caption: '요즘 배우는 것' },
+  { title: 'Archive', caption: '작은 시도들의 보관함' },
+  { title: 'Links', caption: '자주 찾는 링크' },
+  { title: 'Notes', caption: '짧은 메모와 조각들' },
+];
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="개인 홈페이지" />
+    <title>Junbeom Kim</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Junbeom Kim</a>
+      <nav aria-label="Main navigation">
+        {
+          navItems.map((item) => (
+            <a href={item.href} aria-current={item.label === 'Home' ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="intro" aria-labelledby="home-title">
+        <p class="eyebrow">Personal Website</p>
+        <h1 id="home-title">Junbeom</h1>
+        <p class="caption">iOS를 배우고, 웹으로 기록하는 개인 홈페이지 초안입니다.</p>
+      </section>
+
+      <section class="grid-section" aria-label="Future sections">
+        {
+          gridItems.map((item) => (
+            <article class="grid-cell">
+              <h2>{item.title}</h2>
+              <p>{item.caption}</p>
+            </article>
+          ))
+        }
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    color-scheme: light;
+    font-family:
+      'Courier New', Courier, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #151515;
+    background: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: #ffffff;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: min(100% - 32px, 1040px);
+    margin: 0 auto;
+    padding: 30px 0 18px;
+  }
+
+  .brand {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    color: #666666;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  nav a[aria-current='page'] {
+    color: #151515;
+  }
+
+  .page {
+    display: grid;
+    min-height: calc(100vh - 72px);
+    place-items: center;
+    padding: 56px 16px 80px;
+  }
+
+  .intro {
+    width: min(100%, 760px);
+    margin: 0 auto 34px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 16px;
+    color: #6f6f6f;
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 8vw, 4.9rem);
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  .caption {
+    max-width: 620px;
+    margin: 18px auto 0;
+    color: #4f4f4f;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    line-height: 1.9;
+  }
+
+  .grid-section {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(100% - 32px, 760px);
+    aspect-ratio: 2 / 1;
+    border-top: 1px solid #202020;
+    border-left: 1px solid #202020;
+  }
+
+  .grid-cell {
+    display: flex;
+    min-width: 0;
+    padding: 18px;
+    border-right: 1px solid #202020;
+    border-bottom: 1px solid #202020;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #ffffff;
+  }
+
+  .grid-cell h2 {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .grid-cell p {
+    margin: 28px 0 0;
+    color: #5f5f5f;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 720px) {
+    .site-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .page {
+      place-items: start;
+      padding-top: 56px;
+    }
+
+    .intro {
+      text-align: left;
+    }
+
+    .caption {
+      margin-left: 0;
+    }
+
+    .grid-section {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      aspect-ratio: 1 / 2;
+      width: 100%;
+    }
+
+    .grid-cell {
+      padding: 16px;
+    }
+  }
+</style>
